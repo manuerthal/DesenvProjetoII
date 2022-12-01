@@ -7,6 +7,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func GetAnswersByName() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		answer := models.PersonAnswers{}
+		personName := ctx.Query("name")
+		err := db.DB.First(&answer, "person_name = ?", personName).Error
+		if err != nil {
+			ctx.AbortWithStatus(404)
+			return
+		}
+
+		ctx.JSON(
+			200, gin.H{
+				"id":          answer.ID,
+				"person_name": answer.PersonName,
+				"streak":      answer.Streak,
+				"attempts":    answer.Attempts,
+			},
+		)
+	}
+}
+
 func GetAnswers() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		allAnswers := []models.PersonAnswers{}
