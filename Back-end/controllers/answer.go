@@ -56,6 +56,32 @@ func IncreaseStreak() gin.HandlerFunc {
 	}
 }
 
+func EndStreak() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		answer := models.PersonAnswers{}
+		personName := ctx.PostForm("name")
+
+		err := db.DB.First(&answer, "person_name = ?", personName).Error
+		if err != nil {
+			answer.PersonName = personName
+			answer.Attempts = 1
+			db.DB.Create(&answer)
+			ctx.Status(200)
+			return
+		}
+
+		answer.Streak = 0
+		answer.Attempts++
+		err = db.DB.Select("streak", "attempts").Updates(&answer).Error
+		if err != nil {
+			ctx.AbortWithStatus(500)
+			return
+		}
+
+		ctx.Status(200)
+	}
+}
+
 func init() {
 	db.DB.AutoMigrate(models.PersonAnswers{})
 }
