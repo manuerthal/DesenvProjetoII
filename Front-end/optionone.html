@@ -1,0 +1,41 @@
+<!-- LIRIEL PISETTA -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo/style.css">
+    <title> Adivinhe a Palavra - Seis letras </title>
+</head>
+
+<body>
+    <div id="voltar">
+        <a href="page.html"><img src="imagem/voltar.png" alt="voltar" width="100px"></a>
+    </div>
+    <div class="app-container">
+        <div class="titulo-container">
+            <div class="titulo">Adivinhe a Palavra</div>
+            <br>
+        </div>
+        <div class="tile-container"></div>
+        <div class="keyboard-container">
+            <div class="keyboard-row-container notAlphabetic" id="backspaceAndEnterRow" id="botao"></div>
+            <div class="keyboard-row-container" id="keyboardFirstRow"></div>
+            <div class="keyboard-row-container" id="keyboardSecondRow"></div>
+            <div class="keyboard-row-container" id="keyboardThirdRow"></div>
+        </div>
+        <br>
+    </div>
+    <div id="erro" style="text-align: center; font-size: 15px; display: none;color: #52796F; 
+                    width: 30%; margin: 0 auto; background-color: white; 
+                    border-radius: 10px;">
+        <h3>Palavra Não Identificada!</h3>
+    </div>
+    <br>
+    <script src="script/scriptone.js"></script>
+
+</body>
+
+</html>

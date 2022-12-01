@@ -1,0 +1,350 @@
+/* LIRIEL PISETTA */
+
+/*@font-face vai especificar a fonte customizada*/
+@font-face {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: 500;
+  font-stretch: expanded;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/opensans/v28/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4n.ttf) format('truetype');
+}
+
+/*Deixa um espaçamento de valor padrão para todos os navegadores*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*Nesse elemento chamamos a fonte customiza, definimos a cor da fonte e um background padrão para o site*/
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #000000;
+  color: white;
+}
+
+
+/* Constituido a forma das caixas de entrada das letras */
+.texto_letra {
+  width: 25%;
+  height: 2.5em;
+  border-radius: 30px;
+  text-align: center;
+}
+
+/* Definição de cores das letras correspondentes */
+.tem {
+  background-color: rgb(214, 229, 57) !important;
+}
+
+.certo {
+  background-color: rgb(134, 206, 134) !important;
+}
+
+.errado {
+  background-color: rgb(255, 0, 0) !important;
+}
+
+.não_classificada {
+  background-color: rgb(76, 0, 255);
+}
+
+/*Define que todos os elementos com a classe titulo tenham um tamanho de 70px */
+.titulo {
+  font-size: 70px;
+}
+
+/*Define que todos os parágrafos da página tenham 30px*/
+p {
+  font-size: 35px;
+}
+
+
+/* Alinhamento da caixa de palavras */
+#palavra {
+  display: inline-flex;
+  justify-content: center;
+}
+
+
+/*Nessa classe definimos que o posicionamento do bloco de código seja centralizado*/
+.container {
+  padding-top: 5%;
+  text-align: center;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Aqui tiramos todo o estilo padrão da lista*/
+.container .menu-h nav ul {
+  list-style: none;
+}
+
+.container .menu-h nav ul li {
+  padding: 20px;
+  /*Define a distância entra as opções*/
+  display: inline-block;
+  /*As opções serão distribuidas em uma unica linha, quebrando a lógica do flex-direction: column; definida na classe container*/
+}
+
+/*Definição da estilização dos links*/
+nav ul li a {
+  font-size: 25px;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 7px;
+  padding: 10px;
+
+}
+
+/*Define como o link irá se comportar ao passar o mouse*/
+nav ul li a:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.jogo {
+  padding-top: 10%;
+  text-align: center;
+  color: white;
+  letter-spacing: 2px;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Formato especifico do botão*/
+form a {
+  font-size: px;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
+
+/*Define tamanho, borda e cor do botão*/
+#botao {
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  color: rgb(250, 250, 250);
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  align-items: center;
+}
+
+/*Define o posicionamento da formulário dentro da estrutura da página*/
+.form {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tamanho das caixas de texto do Login e Cadastro */
+input {
+  width: 60%;
+  height: 23px;
+  border-radius: 5px;
+}
+
+/*Formatação dos icones com as opcões*/
+.escolhas {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: white;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.escolhas svg {
+  padding: 35px;
+}
+
+
+.arrumar {
+  width: 100vw;
+  height: 80vh;
+  text-align: center;
+  color: white;
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrumar svg {
+  padding: 35px;
+}
+
+/*Cor dos icones*/
+.icons {
+  color: #ffffff;
+}
+
+.tres-teclados {
+  width: 1000px;
+  height: 350px;
+  display: inline-flex;
+  align-items: stretch;
+}
+
+/*Características do bloco onde está localizado as teclas*/
+.tile-container {
+  width: 330px;
+  margin-bottom: 30px;
+}
+
+/*Características do bloco onde está localizado as teclas*/
+.tile-container2 {
+  width: 330px;
+  margin-bottom: 30px;
+}
+
+/*Características do bloco onde está localizado as teclas*/
+.tile-container3 {
+  width: 300px;
+  margin-bottom: 30px;
+}
+
+/*Características do título*/
+.titulo-container {
+  text-align: center;
+  width: 510px;
+  margin-top: 1rem;
+}
+
+/*Características do bloco onde está o jogo*/
+.app-container {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*Características de cada fileira*/
+.tile-row {
+  margin-bottom: 1rem;
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+}
+
+/*Características de cada coluna */
+.tile-column {
+  background-color: #f4f3f1;
+  color: #252525;
+  height: 40px;
+  width: 48px;
+  border-radius: 0rem;
+  margin-right: 0.25rem;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+/*Característica do bloco quando este está sendo digitado*/
+.typing {
+  border: 4px solid #000000;
+}
+
+/*Característica do bloco quando este não está sendo utilizado*/
+.disabled {
+  border: 1px solid #252525;
+}
+
+/*Define a cor da letra que está no lugar certo na palavra*/
+.right {
+  background-color: #51b36e;
+  color: #f4f3f1;
+}
+
+/*Define a cor da letra que não está na palavra*/
+.wrong {
+  background-color: #943e3c;
+  color: #f4f3f1;
+}
+
+/*Define a cor da letra que está localizada na palavra, porém no lugar erradp*/
+.displaced {
+  background-color: #c79c2e;
+  color: #f4f3f1;
+}
+
+/*Define as catacterísticas da área onde está o teclado*/
+.keyboard-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Define tamanho, alinhamento e margem de cada fileira do teclado*/
+.keyboard-row-container {
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+  display: flex;
+}
+
+/*Define a característica da parte do teclado de enviar e deletar*/
+.keyboard-row-container.notAlphabetic {
+  width: 100%;
+}
+
+/*Define tamanho, alinhamento e margem de cada botão do teclado*/
+.keyboard-row-container:not(.notAlphabetic) button {
+  width: 8%;
+  height: 40px;
+  border-radius: 0.25rem;
+  margin-right: 0.25rem;
+  border: 1px solid #252525;
+  font-size: 16px;
+  cursor: pointer;
+  font-size: 20px;
+  color: rgb(250, 250, 250);
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  align-items: center;
+}
+
+#backspaceAndEnterRow button {
+  width: 20%;
+  height: 40px;
+  border-radius: 0.25rem;
+  margin-right: 0.25rem;
+  border: 1px solid #252525;
+  font-size: 16px;
+  cursor: pointer;
+  font-size: 20px;
+  color: rgb(250, 250, 250);
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  align-items: center;
+
+}

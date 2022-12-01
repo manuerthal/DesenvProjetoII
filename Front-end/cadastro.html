@@ -1,0 +1,79 @@
+<!-- LIRIEL PISETTA -->
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulário de Cadastro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="estilo/style.css" />
+</head>
+
+<body>
+  <div class="form">
+    <form>
+      <div style="text-align: center">
+        <div class="titulo">Cadastro</div>
+
+        <br>
+
+        <label for="nome">Nome:</label>
+        <input id="nome_cadastro" name="nome_cadastro" required="required" type="text" placeholder=" nome" />
+
+        <br><br>
+
+        <label for="email_cadastro">Email:</label>
+        <input id="email_cadastro" name="email_cadastro" required="required" type="text" placeholder=" @gmail.com" />
+
+        <br><br>
+
+        <label for="senha_cadastro">Senha:</label>
+        <input id="senha_cadastro" name="senha_cadastro" required="required" type="password" placeholder=" ex:123.." />
+
+        <br><br>
+
+        <input id="botao" type="submit" value="Cadastre-se" />
+
+
+        <br><br>
+
+        <label>Já tem conta?</label>
+        <a href="login.html">Login </a>
+
+    </form>
+  </div>
+  <script>
+    async function cadastrar(event) {
+        event.preventDefault()
+
+        username = document.getElementById("nome_cadastro").value
+        email = document.getElementById("email_cadastro").value
+        password = document.getElementById("senha_cadastro").value
+
+
+
+        const { data } = await axios.post("http://localhost:8080/tenteAdivinhar/gravar-user", {
+            username, email, password
+        }).catch((e) => {
+            alert(e.response.data)
+        }
+
+
+
+            // ,
+            // {headers: {"Access-Control-Allow-Origin": "*"},
+            // auth:{
+            //   username: 'admin',
+            //   password: 'admin302'
+            // }
+
+            // }
+        )
+        document.getElementById("nome_cadastro").value = ""
+        document.getElementById("email_cadastro").value = ""
+        document.getElementById("senha_cadastro").value = ""
+    }
+</script>
+
+</body>
+
+</html>

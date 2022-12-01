@@ -1,0 +1,75 @@
+<!-- LIRIEL PISETTA -->
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulário de Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="estilo/style.css" />
+</head>
+
+<body>
+
+    <div class="form">
+        <form>
+            <div style="text-align: center">
+                <div class="titulo">Login</div>
+
+                <br>
+
+                <label for="email_login">Email:</label>
+                <input id="email_login" name="email_login" required="required" type="text" placeholder=" @gmail.com" />
+
+                <br><br>
+
+                <label for="senha_login">Senha:</label>
+                <input id="senha_login" name="senha_login" required="required" type="password" placeholder=" 123.." />
+
+                <br><br>
+
+                <input id="botao" type="submit" value="Login" />
+
+
+                <br><br>
+
+                <label>Ainda não tem conta?</label>
+                <a href="cadastro.html">Cadastre-se</a>
+
+            </div>
+        </form>
+    </div>
+   
+  <script>
+    async function logar(event) {
+      event.preventDefault()
+
+      email = document.getElementById("email_login").value
+      password = document.getElementById("senha_login").value
+
+
+
+      const { data } = await axios.post("http://localhost:8080/tenteAdivinhar/login", {
+        email, password
+      }).catch((e) => {
+        alert(e.response.data)
+      }
+
+
+
+
+
+        // ,
+        // {headers: {"Access-Control-Allow-Origin": "*"},
+        // 
+
+        // }
+      )
+
+      alert(data)
+      document.getElementById("email_login").value = ""
+      document.getElementById("senha_login").value = ""
+    }
+  </script>
+</body>
+
+</html>

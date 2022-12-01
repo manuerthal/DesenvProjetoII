@@ -1,0 +1,71 @@
+<!-- LIRIEL PISETTA -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="estilo/style2.css">
+  <title> Instruções</title>
+</head>
+
+<body>
+  <div id="voltar">
+    <a href="escolhas.html"><img src="imagem/voltar.png" alt="voltar" width="100px" style="margin: 5 auto;"></a>
+  </div>
+
+  <!-- Página de cada slide-->
+  <section class="carousel" aria-label="Gallery">
+    <ol class="carousel__viewport">
+      <li id="carousel__slide1" tabindex="0" class="carousel__slide">
+        <div class="carousel__snapper">
+          <a href="#carousel__slide3" class="carousel__prev">Go to last slide</a>
+          <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
+          <div class=container4>
+          </div>
+          <IMG class="displayed" src="imagem/instrucao.jpg" alt="instrucao">
+        </div>
+      </li>
+
+      <li id="carousel__slide2" tabindex="0" class="carousel__slide">
+        <div class="carousel__snapper"></div>
+        <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
+        <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
+        </div>
+        </div>
+        <IMG class="displayed" src="imagem/fim.jpg" alt="fim">
+        </div>
+      </li>
+
+      <li id="carousel__slide3" tabindex="0" class="carousel__slide">
+        <div class="carousel__snapper"></div>
+        <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
+        <a href="#carousel__slide1" class="carousel__next">Go to first slide</a>
+        </div>
+        <IMG class="displayed" src="imagem/representar.jpg" alt="representar">
+        </div>
+      </li>
+    </ol>
+
+    <!--Funcionamento da rotação de bolinhas-->
+    <aside class="carousel__navigation">
+      <ol class="carousel__navigation-list">
+        <li class="carousel__navigation-item">
+          <a href="#carousel__slide1" class="carousel__navigation-button">Go to slide 1</a>
+        </li>
+
+        <li class="carousel__navigation-item">
+          <a href="#carousel__slide2" class="carousel__navigation-button">Go to slide 2</a>
+        </li>
+
+        <li class="carousel__navigation-item">
+          <a href="#carousel__slide3" class="carousel__navigation-button">Go to slide 3</a>
+        </li>
+      </ol>
+
+    </aside>
+  </section>
+</body>
+
+</html>
