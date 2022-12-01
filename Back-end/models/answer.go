@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Answer struct {
+type PersonAnswers struct {
 	gorm.Model
 	PersonName string `gorm:"unique;not null"`
 	Streak     uint

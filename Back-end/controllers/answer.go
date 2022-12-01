@@ -9,7 +9,7 @@ import (
 
 func GetAnswers() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		allAnswers := []models.Answer{}
+		allAnswers := []models.PersonAnswers{}
 		db.DB.Find(&allAnswers)
 		answersMap := []gin.H{}
 
@@ -31,7 +31,7 @@ func GetAnswers() gin.HandlerFunc {
 
 func IncreaseStreak() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		answer := models.Answer{}
+		answer := models.PersonAnswers{}
 		personName := ctx.PostForm("name")
 
 		err := db.DB.First(&answer, "person_name = ?", personName).Error
@@ -57,5 +57,5 @@ func IncreaseStreak() gin.HandlerFunc {
 }
 
 func init() {
-	db.DB.AutoMigrate(models.Answer{})
+	db.DB.AutoMigrate(models.PersonAnswers{})
 }
