@@ -22,6 +22,7 @@ func GetAnswersByName() gin.HandlerFunc {
 				"id":          answer.ID,
 				"person_name": answer.PersonName,
 				"streak":      answer.Streak,
+				"wins":        answer.Wins,
 				"attempts":    answer.Attempts,
 			},
 		)
@@ -39,6 +40,7 @@ func GetAnswers() gin.HandlerFunc {
 				"id":          answer.ID,
 				"person_name": answer.PersonName,
 				"streak":      answer.Streak,
+				"wins":        answer.Wins,
 				"attempts":    answer.Attempts,
 			})
 		}
@@ -60,6 +62,7 @@ func IncreaseStreak() gin.HandlerFunc {
 			answer.PersonName = personName
 			answer.Streak = 1
 			answer.Attempts = 1
+			answer.Wins = 1
 			db.DB.Create(&answer)
 			ctx.Status(200)
 			return
@@ -67,6 +70,7 @@ func IncreaseStreak() gin.HandlerFunc {
 
 		answer.Streak++
 		answer.Attempts++
+		answer.Wins++
 		err = db.DB.Updates(&answer).Error
 		if err != nil {
 			ctx.AbortWithStatus(500)
