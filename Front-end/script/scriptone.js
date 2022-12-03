@@ -30,12 +30,30 @@ async function setDic() { await fetch('./seis.txt').then(response => response.te
 
 
 function gameWin(){
-  window.alert("Parabéns! Você acertou a palavra.")
-  window.location.reload() 
+  window.alert("Parabéns! Você acertou a palavra.");
+  (async () => {
+      const response = await fetch('/answer/increase_streak', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: 'name='+localStorage.getItem("name")
+      })
+  })();
+  window.location.reload();
 }
 
 function gameLost(){
-  window.alert("Game Over! Suas tentativas acabaram, recarregue a página para iniciar um novo jogo.")
+  (async () => {
+    const response = await fetch('/answer/end_streak', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: 'name='+localStorage.getItem("name")
+      })
+  })();
+  window.alert("Game Over! Suas tentativas acabaram, recarregue a página para iniciar um novo jogo.");
 }
 
 function startGame(){
