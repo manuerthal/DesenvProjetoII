@@ -56,6 +56,10 @@ func IncreaseStreak() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		answer := models.PersonAnswers{}
 		personName := ctx.PostForm("name")
+		if personName == "" {
+			ctx.AbortWithStatus(400)
+			return
+		}
 
 		err := db.DB.First(&answer, "person_name = ?", personName).Error
 		if err != nil {
@@ -85,6 +89,10 @@ func EndStreak() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		answer := models.PersonAnswers{}
 		personName := ctx.PostForm("name")
+		if personName == "" {
+			ctx.AbortWithStatus(400)
+			return
+		}
 
 		err := db.DB.First(&answer, "person_name = ?", personName).Error
 		if err != nil {
