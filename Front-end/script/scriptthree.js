@@ -53,6 +53,7 @@ function gameLost(){
       })
   })();
   window.alert("Game Over! Suas tentativas acabaram, recarregue a página para iniciar um novo jogo.");
+  window.location.reload();
 }
 
 function startGame(){
