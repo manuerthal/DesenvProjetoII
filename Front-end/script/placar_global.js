@@ -2,12 +2,18 @@ let addRows = (tbodyID, content) => {
     let tbody = document.getElementById(tbodyID);
     for (let answer of content) {
         let newRow = tbody.insertRow();
-        for (let key in answer) {
-            if (key === 'id') continue;
-            let newCell = newRow.insertCell();
-            let newCellContent = document.createTextNode(answer[key]);
-            newCell.appendChild(newCellContent);
-        }
+        let newCell = newRow.insertCell();
+        let newCellContent = document.createTextNode(answer.person_name);
+        newCell.appendChild(newCellContent);
+        newCell = newRow.insertCell();
+        newCellContent = document.createTextNode(answer.streak);
+        newCell.appendChild(newCellContent);
+        newCell = newRow.insertCell();
+        newCellContent = document.createTextNode(answer.wins);
+        newCell.appendChild(newCellContent);
+        newCell = newRow.insertCell();
+        newCellContent = document.createTextNode(answer.attempts - answer.wins);
+        newCell.appendChild(newCellContent);
     }
 }
 
