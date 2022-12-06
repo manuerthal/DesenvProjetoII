@@ -17,16 +17,25 @@ const columns = 7;
 
 let currentRow = 0;
 let currentColumn = 0; 
-let palavraMap = {};
+let palavraMap = [];
 var palavra;
 
 const guesses = []; //Armazena as tentativas já feitas para serem exibidas na tela.
 
-async function setDic() { await fetch('./sete.txt').then(response => response.text()).then(text => {
-    dicionario = text.split("\n");
+function __init__() {
+  startGame();
+  main();
+}
 
-})} //Cria a variável dicionário com base no arquivo cinco.txt
+__init__();
 
+async function setDic() {
+  await fetch("./sete.txt")
+    .then((response) => response.text())
+    .then((text) => {
+      dicionario = text.split("\n");
+    });
+} //Cria a variável dicionário com base no arquivo cinco.txt
 
 function gameWin(){
   window.alert("Parabéns! Você acertou a palavra.");
@@ -56,8 +65,9 @@ function gameLost(){
   window.location.reload();
 }
 
-function startGame(){
-  for (let rowIndex = 0; rowIndex < rows; rowIndex++) { //Cria a parte principal do jogo baseado nas constantes fileiras e colunas.
+function startGame() {
+  for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+    //Cria a parte principal do jogo baseado nas constantes fileiras e colunas.
     guesses[rowIndex] = new Array(columns);
     const tileRow = document.createElement("div");
     tileRow.setAttribute("id", "row" + rowIndex);
@@ -65,7 +75,9 @@ function startGame(){
     for (let columnIndex = 0; columnIndex < columns; columnIndex++) {
       const tileColumn = document.createElement("div");
       tileColumn.setAttribute("id", "row" + rowIndex + "column" + columnIndex);
-      tileColumn.setAttribute("class", rowIndex === 0 ? "tile-column typing" : "tile-column disabled"
+      tileColumn.setAttribute(
+        "class",
+        rowIndex === 0 ? "tile-column typing" : "tile-column disabled"
       );
       tileRow.append(tileColumn);
       guesses[rowIndex][columnIndex] = "";
@@ -75,94 +87,132 @@ function startGame(){
 }
 
 // Função que executa o programa após do dicionário ter carregado
-async function main ()  { 
-  await setDic()  
-  palavra = dicionario[Math.floor(Math.random() * dicionario.length)].toUpperCase();
-  
+async function main() {
+  await setDic();
+  palavra =
+    dicionario[Math.floor(Math.random() * dicionario.length)].toUpperCase();
 
-  // Define o status da palavra. [ Green, Yellow or Red ] 
+  console.log(palavra);
+
+  // Define o status da palavra. [ Green, Yellow or Red ]
   for (let index = 0; index < palavra.length; index++) {
-    palavraMap[palavra[index]] = index;
-
+    const LETTER = palavra[index];
+    palavraMap.push({ letter: LETTER, index: index });
   }
-  console.log(palavra) 
 }
 
-
-
-function __init__(){
-  startGame()
-  main() 
-}
-
-__init__()
-
-function checkGuess() { //Verifica se a tentativa está certa ou errada, assim como as letras.
-  const guess = guesses[currentRow].join(""); 
-  if (guess.length !== columns) {
-    return;
-  } 
-
-  var currentColumns = document.querySelectorAll(".typing"); 
-  for (let index = 0; index < columns; index++) { //Verificação das letras uma por uma.
-    const letter = guess[index];
-    if (palavraMap[letter] === undefined) {
-        currentColumns[index].classList.add("wrong") //Adiciona a classe "errado" se a letra não estiver na palavra.
-    } else {
-        if(palavraMap[letter] === index) {
-            currentColumns[index].classList.add("right") //Adiciona a classe "certo" se a letra estiver na palavra.
-        } else {
-            currentColumns[index].classList.add("displaced") //Adiciona a classe "deslocado" se a letra estiver na palavra, mas em outro lugar.
-        }
-    }
-  }
-  
-  if(guess === palavra) {
-    gameWin()
-    return
-}  
-  if(currentRow === rows -1) { //Mostra a mensagem que você perdeu o jogo após atingir todas as tentativas disponíveis.
-      gameLost()
-    } 
-  
-  else {
-        moveToNextRow()
-    }
-
-};
-
-function moveToNextRow(){ //Após uma tentativa ser efetuada, é movido para a próxima fileira para que inicie-se uma nova tentativa
-  let typingColumns = document.querySelectorAll(".typing")
+function moveToNextRow() {
+  //Após uma tentativa ser efetuada, é movido para a próxima fileira para que inicie-se uma nova tentativa
+  let typingColumns = document.querySelectorAll(".typing");
   for (let index = 0; index < typingColumns.length; index++) {
-      typingColumns[index].classList.remove("typing")
-      typingColumns[index].classList.add("disabled")
+    typingColumns[index].classList.remove("typing");
+    typingColumns[index].classList.add("disabled");
   }
-  currentRow++
-  currentColumn=0
+  currentRow++;
+  currentColumn = 0;
 
-  const currentRowEl = document.querySelector("#row"+currentRow)
-  let currentColumns = currentRowEl.querySelectorAll(".tile-column")
+  const currentRowEl = document.querySelector("#row" + currentRow);
+  let currentColumns = currentRowEl.querySelectorAll(".tile-column");
   for (let index = 0; index < currentColumns.length; index++) {
-      currentColumns[index].classList.remove("disabled")
-      currentColumns[index].classList.add("typing")
+    currentColumns[index].classList.remove("disabled");
+    currentColumns[index].classList.add("typing");
   }
 }
 
-function handleKeyboardOnClick(key){ //Funcionamento do teclado quando for utilizado
-  if (currentColumn === columns) {
-    return;
-  }
+/*  QUANDO O TECLADO É ACIONADO  */
+document.onkeydown = function (evt) {
+  const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const KEY = evt.key.toUpperCase();
 
-  const currentTile = document.querySelector(
-    "#row" + currentRow + "column" + currentColumn
-  );
-  console.log('KEY:',key)
-  currentTile.textContent = key;
-  guesses[currentRow][currentColumn] = key;
-  currentColumn++;
+  if (KEY === "ENTER") {
+    checkGuess();
+  } else if (KEY === "BACKSPACE") {
+    handleBackspace();
+  } else {
+    LETTERS.includes(KEY) && handleKeyboardOnClick(KEY);
+  }
 };
 
-const createKeyboardRow = (keys, keyboardRow) => { //Função que cria a fileira do teclado dada as informações de qual fileira é e qual tecladas será armazenada.
+async function checkGuess() {
+  const guess = guesses[currentRow].join("");
+
+  if (guess.length === columns) {
+    if (dicionario.includes(guess)) {
+      var guessObject = [];
+      for (let index in guess) {
+        const LETTER = guess[index];
+        guessObject.push({ letter: LETTER, index: index });
+      }
+  
+      var currentColumns = document.querySelectorAll(".typing");
+      for (let index = 0; index < columns; index++) {
+        if (palavraMap[index].letter !== guessObject[index].letter) {
+          currentColumns[index].classList.add("wrong"); //Adiciona a classe "errado" se a letra não estiver na palavra.
+        }
+        if (palavraMap[index].letter === guessObject[index].letter) {
+          currentColumns[index].classList.add("right"); //Adiciona a classe "certo" se a letra estiver na palavra.
+        } else {
+          if (palavra.includes(guess[index])) {
+            currentColumns[index].classList.add("displaced"); //Adiciona a classe "deslocado" se a letra estiver na palavra, mas em outro lugar.
+          }
+        }
+      }
+      
+      
+      if (guess === palavra) {
+        gameWin();
+      }
+      if (currentRow === rows - 1) {
+        //Mostra a mensagem que você perdeu o jogo após atingir todas as tentativas disponíveis.
+        gameLost();
+      } else {
+        moveToNextRow();
+      }
+   
+    } 
+    else{
+      var span = document.getElementById("erro")
+  
+      if( span.style.display === "none"){
+        span.style.display = "flex"
+        span.innerText = "Palavra não encontrada no sistema"
+
+        setTimeout(() => {
+        span.style.display = "none"
+        }, 2000);
+      } 
+     
+    }
+  }
+
+  
+}
+function handleBackspace() {
+  if (currentColumn != 0) {
+    currentColumn--;
+    guesses[currentRow][currentColumn] = "";
+    const tile = document.querySelector(
+      "#row" + currentRow + "column" + currentColumn
+    );
+    tile.textContent = "";
+  }
+}
+
+function handleKeyboardOnClick(key) {
+  //Funcionamento do teclado quando for utilizado
+  if (currentColumn != columns) {
+    const currentTile = document.querySelector(
+      "#row" + currentRow + "column" + currentColumn
+    );
+    currentTile.textContent = key;
+    guesses[currentRow][currentColumn] = key;
+    currentColumn++;
+  }
+}
+
+/*  _HTML_ELEMENTS  */
+const createKeyboardRow = (keys, keyboardRow) => {
+  //Função que cria a fileira do teclado dada as informações de qual fileira é e qual tecladas será armazenada.
   keys.forEach((key) => {
     var buttonElement = document.createElement("button");
     buttonElement.textContent = key;
@@ -176,17 +226,6 @@ createKeyboardRow(keysFirstRow, keyboardFirstRow); //Executa a função de criar
 createKeyboardRow(keysSecondRow, keyboardSecondRow);
 createKeyboardRow(keysThirdRow, keyboardThirdRow);
 
-function handleBackspace () {
-  if(currentColumn === 0){
-      return;
-  }
-
-  currentColumn--
-  guesses[currentRow][currentColumn] = ""
-  const tile = document.querySelector("#row"+currentRow+"column"+currentColumn)
-  tile.textContent = ""
-};
-
 const backspaceButton = document.createElement("button"); //Funcionamento do botão de delete
 backspaceButton.addEventListener("click", handleBackspace);
 backspaceButton.textContent = "DELETE";
@@ -196,26 +235,3 @@ const enterButton = document.createElement("button"); //Funcionamento do botão 
 enterButton.addEventListener("click", checkGuess);
 enterButton.textContent = "ENTER";
 backspaceAndEnterRow.append(enterButton);
-
-document.onkeydown = function (evt) {
-  const LETTERS = ['A', 'B', 'C', 'D',
-  'E', 'F', 'G', 'H', 'I', 'J', 'K',
-  'L', 'M','N','O','P','Q','R','S','T',
-  'U','V','W','X','Y','Z'
-] 
-
-  const KEY = evt.key.toUpperCase()
-
-  if( KEY === "ENTER"){
-      checkGuess();
-  }  
-
-
-  if (KEY === "BACKSPACE") {
-      handleBackspace()
-  } 
-  
-  if (LETTERS.includes(KEY)) {
-      handleKeyboardOnClick(KEY)
-  }
-}
