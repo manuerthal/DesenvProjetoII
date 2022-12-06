@@ -1,6 +1,4 @@
-$(function () { 
-    $(document).on("click", "#logout", function logout() {
-            localStorage.removeItem("name");
-            window.location = 'escolhas.html';
-        });  
-});
+let logoutFunc = () => {
+    localStorage.removeItem('name');
+    window.location.reload();
+}
